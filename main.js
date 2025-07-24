@@ -1,16 +1,15 @@
 import { checkPalindrome } from "./checkPalindrome.js";
 import { styles } from "./styles.js";
+import { createElementWithClasses } from "./createElementWithClasses.js";
 
-let items = {
-    input: document.createElement("input"),
-    button: document.createElement("button"),
-    result: document.createElement("div")
+document.body.classList.add(...styles.window.split(' '));
+
+const container = createElementWithClasses('div', styles.container);
+const items = {
+    input: createElementWithClasses('input', styles.input),
+    button: createElementWithClasses('button', styles.button),
+    result: createElementWithClasses('result', styles.result)
 }
-
-Object.assign(document.body.style, styles.window);
-Object.assign(items.input.style, styles.input);
-Object.assign(items.button.style, styles.button);
-items.result.classList.add(...styles.result.split(' '));
 
 items.button.addEventListener('click', () => checkPalindrome(items));
 
@@ -20,4 +19,5 @@ items.input.addEventListener('keydown', (e) => {
     }
 });
 
-document.body.append(...Object.values(items));
+container.append(...Object.values(items));
+document.body.append(container);
